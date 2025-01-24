@@ -95,7 +95,7 @@ export const BookDetailsView = ({
                 )}
                 {book.is_bestseller === 1 && (
                   <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm">
-                    Bestseller
+                    ბესთსელერი
                   </span>
                 )}
               </div>

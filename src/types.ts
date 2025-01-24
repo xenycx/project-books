@@ -7,6 +7,7 @@ export interface Book {
   variations: Array<{
     price: number;
     discount: number;
+    stock_count?: number;  // Add this line
   }>;
   author?: Author;
 }

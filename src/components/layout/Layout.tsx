@@ -34,7 +34,7 @@ export const Layout = ({
                   <ArrowLeft className="w-6 h-6" />
                 </button>
               )}
-              <h1 className="text-2xl font-bold">Books Store</h1>
+              <h1 className="text-2xl font-bold">ბიბლუსი</h1>
             </div>
             <div className="flex items-center gap-4">
               {showSearch && (
@@ -43,7 +43,7 @@ export const Layout = ({
                     type="text"
                     value={searchQuery}
                     onChange={(e) => onSearchChange(e.target.value)}
-                    placeholder="Search books or authors..."
+                    placeholder="ძებნა"
                     className={`w-64 px-4 py-2 rounded-lg ${
                       darkMode
                         ? 'bg-gray-700 text-white placeholder-gray-400'
