@@ -90,7 +90,7 @@ export const BookDetailsView = ({
               <div className="flex gap-3 mb-6">
                 {book.is_new === 1 && (
                   <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm">
-                    New
+                    ახალი
                   </span>
                 )}
                 {book.is_bestseller === 1 && (
