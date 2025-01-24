@@ -36,7 +36,7 @@ export const AuthorDetails = ({ author, books, darkMode, onClose, onBookClick }:
               )}
               {author.country && (
                 <p className={`text-lg mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  <span className="font-semibold">Country:</span> {author.country}
+                  <span className="font-semibold">ქვეყანა:</span> {author.country}
                 </p>
               )}
             </div>
@@ -54,7 +54,7 @@ export const AuthorDetails = ({ author, books, darkMode, onClose, onBookClick }:
 
           {books.length > 0 && (
             <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6">Books by {author.fullname}</h2>
+              <h2 className="text-2xl font-bold mb-6">{author.fullname}ს წიგნები</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {books.map((book) => (
                   <BookCard
