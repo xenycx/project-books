@@ -1,36 +1,60 @@
 export interface Book {
   id: number;
   name: string;
-  pictures: string[];
   min_picture: string;
-  author: Author | null;
-  p: number;
-  is_bestseller: number;
   is_new: number;
-  variations: Variation[];
+  is_bestseller: number;
+  variations: Array<{
+    price: number;
+    discount: number;
+  }>;
+  author?: Author;
+}
+
+// src/types.ts
+export interface BookDetails extends Book {
+  isbn?: string;
+  publisher?: string;
+  translator?: string;
+  language?: string;
+  description?: string;
+  details?: {
+    desc?: string;
+    youtube_link?: string;
+    soundcloud_link?: string;
+    book_link?: string;
+  };
+  category?: {
+    id: number;
+    name: string;
+    description?: string;
+  };
+  variations: Array<{
+    price: number;
+    discount: number;
+    specs?: Array<{
+      value: string;
+      element: {
+        label: string;
+      };
+    }>;
+  }>;
 }
 
 export interface Author {
   id: number;
   fullname: string;
-  img: string;
-  description: string;
-  country: string;
-  year_start: string;
-  year_end: string | null;
+  img?: string;
+  country?: string;
+  description?: string;
   books?: Book[];
 }
 
-export interface Variation {
-  id: number;
-  price: number;
-  discount: number;
-  discount_value: number;
-}
-
 export interface ApiResponse {
-  current_page: number;
   data: Book[];
   last_page: number;
-  total: number;
+}
+
+export interface BookWithKey extends Book {
+  uniqueKey?: string;
 }
