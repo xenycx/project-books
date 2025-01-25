@@ -14,3 +14,14 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+#root > div > main > div > div > div > div > div > div:nth-child(1) {
+  width: 50%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  #root > div > main > div > div > div > div > div > div:nth-child(1) {
+    width: 100%;
+  }
+}
