@@ -1,4 +1,3 @@
-// src/components/books/BookCard.tsx
 import { Book } from '../../types';
 import { useCallback } from 'react';
 

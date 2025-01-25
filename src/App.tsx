@@ -62,6 +62,7 @@ function App() {
   
 
   const handleBookClick = useCallback(async (book: Book) => {
+    setSelectedBook(null); // P0898
     setLoadingBookDetails(true);
     try {
       const response = await bookService.getBookDetails(book.id);
@@ -74,6 +75,7 @@ function App() {
   }, []);
 
   const handleAuthorClick = useCallback(async (authorOrId: Author | number) => {
+    setSelectedBook(null); // Pd427
     try {
       const authorId = typeof authorOrId === 'number' ? authorOrId : authorOrId.id;
       const authorDetails = await getAuthorDetails(authorId);
@@ -100,6 +102,12 @@ function App() {
       fetchBooks();
     }
   }, [inView, hasMore, loading, searchQuery, selectedAuthor, fetchBooks]);
+
+  useEffect(() => {
+    if (selectedAuthor) {
+      setSelectedBook(null); // P4ae6
+    }
+  }, [selectedAuthor]);
 
   const displayedBooks = selectedAuthor 
     ? authorBooks
