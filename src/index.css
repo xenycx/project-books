@@ -4,7 +4,12 @@
 
 @layer base {
   body {
-    @apply antialiased;
+    @apply antialiased bg-gray-50 dark:bg-gray-900 transition-colors duration-200;
+  }
+
+  /* Improved dark mode transitions */
+  *, *::before, *::after {
+    @apply transition-colors duration-200;
   }
 }
 
@@ -15,13 +20,94 @@
   overflow: hidden;
 }
 
-#root > div > main > div > div > div > div > div > div:nth-child(1) {
-  width: 50%;
-  height: auto;
+/* Remove the problematic first-child rule */
+
+/* Styles for the filters */
+.filters-container {
+  @apply flex justify-between items-center gap-4 px-4 mt-4;
 }
 
-@media (max-width: 768px) {
-  #root > div > main > div > div > div > div > div > div:nth-child(1) {
-    width: 100%;
+.book-filter {
+  @apply flex flex-wrap gap-2;
+}
+
+.author-filter {
+  @apply flex flex-wrap gap-2;
+}
+
+.filter-button {
+  @apply px-4 py-2 rounded-lg text-sm font-medium 
+    bg-white dark:bg-gray-800 
+    border border-gray-200 dark:border-gray-700
+    hover:bg-gray-50 dark:hover:bg-gray-700
+    active:scale-95 transform
+    transition-all duration-200
+    focus:outline-none focus:ring-2 focus:ring-blue-500/50;
+}
+
+.filter-button.active {
+  @apply bg-blue-600 dark:bg-blue-500 
+    text-white dark:text-white 
+    border-blue-600 dark:border-blue-500
+    hover:bg-blue-700 dark:hover:bg-blue-600
+    ring-2 ring-blue-500/50;
+}
+
+/* Custom scrollbar styles */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.gray.300') transparent;
   }
+
+  .dark .scrollbar-thin {
+    scrollbar-color: theme('colors.gray.600') transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 rounded-full transition-colors;
+  }
+}
+
+/* Book grid container */
+.book-grid {
+  @apply grid gap-4 sm:gap-6;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+@screen sm {
+  .book-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+@screen lg {
+  .book-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+/* Smooth fade transitions */
+.fade-enter {
+  @apply opacity-0;
+}
+
+.fade-enter-active {
+  @apply opacity-100 transition-opacity duration-300;
+}
+
+.fade-exit {
+  @apply opacity-100;
+}
+
+.fade-exit-active {
+  @apply opacity-0 transition-opacity duration-300;
 }

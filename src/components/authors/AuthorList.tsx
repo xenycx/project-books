@@ -5,26 +5,48 @@ interface AuthorListProps {
   authors: Author[];
   darkMode: boolean;
   onAuthorClick: (author: Author) => void;
+  loading?: boolean;
+  loadingRef?: (node?: Element | null) => void;
 }
 
-export const AuthorList = ({ authors, darkMode, onAuthorClick }: AuthorListProps) => {
-  if (authors.length === 0) return null;
+export const AuthorList: React.FC<AuthorListProps> = ({ 
+  authors, 
+  darkMode, 
+  onAuthorClick,
+  loading,
+  loadingRef
+}) => {
+  if (authors.length === 0 && !loading) {
+    return null;
+  }
 
   return (
-    <div className="mb-8">
-      <h2 className={`text-xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-        Authors
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="space-y-4">
+      {authors.length > 0 && (
+        <h2 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+          ავტორები
+        </h2>
+      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {authors.map((author) => (
           <AuthorCard
             key={author.id}
             author={author}
             darkMode={darkMode}
-            onClick={onAuthorClick}
+            onAuthorClick={onAuthorClick}
           />
         ))}
       </div>
+      {loading && (
+        <div 
+          ref={loadingRef}
+          className="flex justify-center p-4"
+        >
+          <div className={`inline-block h-8 w-8 animate-spin rounded-full border-4 ${
+            darkMode ? 'border-white border-t-transparent' : 'border-gray-900 border-t-transparent'
+          }`} />
+        </div>
+      )}
     </div>
   );
 };

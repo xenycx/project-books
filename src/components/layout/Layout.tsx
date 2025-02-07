@@ -1,17 +1,17 @@
-import { ReactNode } from 'react';
-import { Search, Moon, Sun, ArrowLeft } from 'lucide-react';
+import React from 'react';
+import { Header } from './Header';
 
 interface LayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
   darkMode: boolean;
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onDarkModeToggle: () => void;
   onBackClick?: () => void;
-  showSearch: boolean;
+  showSearch?: boolean;
 }
 
-export const Layout = ({
+export const Layout: React.FC<LayoutProps> = ({
   children,
   darkMode,
   searchQuery,
@@ -19,55 +19,19 @@ export const Layout = ({
   onDarkModeToggle,
   onBackClick,
   showSearch
-}: LayoutProps) => {
+}) => {
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
-      <header className={`sticky top-0 z-50 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-md`}>
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              {onBackClick && (
-                <button
-                  onClick={onBackClick}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-                >
-                  <ArrowLeft className="w-6 h-6" />
-                </button>
-              )}
-              <h1 className="text-2xl font-bold">ბიბლუსი</h1>
-            </div>
-            <div className="flex items-center gap-4">
-              {showSearch && (
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => onSearchChange(e.target.value)}
-                    placeholder="ძებნა"
-                    className={`w-64 px-4 py-2 rounded-lg ${
-                      darkMode
-                        ? 'bg-gray-700 text-white placeholder-gray-400'
-                        : 'bg-gray-100 text-gray-900 placeholder-gray-500'
-                    }`}
-                  />
-                  <Search className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
-                </div>
-              )}
-              <button
-                onClick={onDarkModeToggle}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                {darkMode ? (
-                  <Sun className="w-6 h-6" />
-                ) : (
-                  <Moon className="w-6 h-6" />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-      <main className="flex-1">
+    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
+      <Header
+        darkMode={darkMode}
+        searchQuery={searchQuery}
+        onSearchChange={onSearchChange}
+        onDarkModeToggle={onDarkModeToggle}
+        onBackClick={onBackClick}
+        showSearch={showSearch}
+        className="fixed top-0 left-0 right-0 z-50"
+      />
+      <main className="pt-16 min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
         {children}
       </main>
     </div>

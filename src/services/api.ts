@@ -8,3 +8,13 @@ export const api = axios.create({
     'Accept-Language': 'en-US,en;q=0.6',
   }
 });
+
+export const fetchCategories = async () => {
+  try {
+    const response = await api.get('/category');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+};
